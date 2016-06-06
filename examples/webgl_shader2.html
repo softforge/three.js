@@ -52,9 +52,20 @@
 
 				vec2 position = -1.0 + 2.0 * vUv;
 
-				float red = abs( sin( position.x * position.y + time / 5.0 ) );
-				float green = abs( sin( position.x * position.y + time / 4.0 ) );
-				float blue = abs( sin( position.x * position.y + time / 3.0 ) );
+				float red = 255.0;
+				float green = 255.0;
+				float blue = 255.0;
+
+				if(int(floor(time) / 2.0) * 2 != int(floor(time))) {
+					red = abs( sin( position.x * position.y + time / 5.0 ) );
+					green = abs( sin( position.x * position.y + time / 4.0 ) );
+					blue = abs( sin( position.x * position.y + time / 3.0 ) );
+//					red = 0.0;
+//				    green = 0.0;
+				    blue = floor(time) / 20.0;
+				}
+
+
 				gl_FragColor = vec4( red, green, blue, 1.0 );
 
 			}
@@ -271,7 +282,7 @@
 
 				var delta = clock.getDelta();
 
-				uniforms1.time.value += delta * 5;
+				uniforms1.time.value += delta * 3;
 				uniforms2.time.value = clock.elapsedTime;
 
 //				for ( var i = 0; i < scene.children.length; i ++ ) {
